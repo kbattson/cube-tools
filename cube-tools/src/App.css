@@ -1,0 +1,91 @@
+.home-text {
+  max-width: 400px;
+  margin-left: 200px;
+}
+
+.card-list {
+  max-width: 400px;
+  margin-left: 200px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.card-item {
+  position: relative;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.card-item:hover .card-preview{
+   display: block;
+}
+
+.card-item:hover {  
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.card-preview {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 10;
+}
+
+.card-preview img {
+  width: 200px;
+}
+
+nav {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 16px;
+  margin-top: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.nav-links {
+  margin-left: 200px;
+  display: flex;
+}
+
+nav a {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #888;
+  border-bottom: 2px solid transparent;
+  margin-bottom : -1px;
+}
+
+nav a.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+.recommender-input {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.recommender-text {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.recommender-button {
+  padding: 8px 16px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
