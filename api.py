@@ -14,6 +14,15 @@ app.add_middleware(
 def recommend(cube_id: str):
     return get_recs(cube_id)
 
+@app.get('/test')
+def test():
+    conn = psycopg2.connect(DB_URL)
+    cur.execute("SELECT COUNT(*) FROM cubes")
+    count = cur.fetchone()
+    cur.close()
+    conn.close()
+    return {"count": count}
+
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, port=5000)
