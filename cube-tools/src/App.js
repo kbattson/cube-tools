@@ -8,7 +8,7 @@ import React from 'react';
 function Home() {
   return (
     <div className="home-text">
-      <p>Welcome to cube-tools.com!</p>
+      <p>Welcome to cube-tools!</p>
       <p>This website uses CubeCobra exports to compute top inclusions and recomendations for given cube ids.</p>
       <p>Made by Kalani Battson.</p>
     </div>
