@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from similarity import get_recs
+from similarity import get_recs_sql
 from fastapi.middleware.cors import CORSMiddleware
 import psycopg2
 import os
