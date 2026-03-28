@@ -2,6 +2,9 @@ from fastapi import FastAPI
 from similarity import get_recs
 from fastapi.middleware.cors import CORSMiddleware
 import psycopg2
+import os
+
+DB_URL = os.environ.get("DATABASE_URL")
 
 app = FastAPI()
 
