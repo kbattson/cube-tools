@@ -51,7 +51,7 @@ function Recommender() {
 
   async function handleSubmit() {
     setLoading(true);
-    const res = await fetch(`http://localhost:5000/recommend?cube_id=${cubeId}`);
+    const res = await fetch(`https://cube-tools.onrender.com/recommend?cube_id=${cubeId}`);
     const data = await res.json();
     setRecs(data);
     setPage(0)
