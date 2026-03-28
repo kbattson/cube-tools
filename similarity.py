@@ -61,11 +61,50 @@ def get_recs(target_id):
                         res.append((card_info, score))
 
                     return res
+
+def get_recs_sql(target_id):
+    with open("data/indexToOracleMap.json") as f1:
+        oracle_map = json.load(f1)
+    with open("data/simpleCardDict.json") as f2:
+        card_dict = json.load(f2)
+
+    with (psycopg2.connect(DB_URL)) as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT cards FROM cubes WHERE id = %s", (target_id,))
+            target_cards = set(cur.fetchone()[0])
+
+            cur.execute("""
+               SELECT c.id, c.cards,
+                   cardinality(c.cards & target.cards)::float / cardinality(c.cards | target.cards) AS jaccard
+                FROM cubes c, (SELECT cards FROM cubes WHERE id = %s) AS target
+                WHERE c.id != %s
+                ORDER BY jaccard DESC
+                LIMIT 100
+            """, (target_id, target_id))
+
+            top_100 = cur.fetchall()
+
+            scores = defaultdict(float)
+            for cube_id, card_list, jaccard in top_100:
+                for card in card_list:
+                    if card not in target_cards:
+                        scores[card] += jaccard
+
+            top_card_ids = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+            res = []
+            for card_id, score in top_card_ids:
+                oracle_id = oracle_map.get(str(card_id))
+                if oracle_id and oracle_id in card_dict:
+                    res.append((card_dict[oracle_id], score))
+            return res
+                    
             
 
                     
                 
 
 if __name__ == "__main__":
+    print(get_recs_sql("4b903895-7f8f-45d4-8fb8-978021e17c8e"))
     # print(get_similarity("4b903895-7f8f-45d4-8fb8-978021e17c8e"))
-    print(get_recs("4b903895-7f8f-45d4-8fb8-978021e17c8e"))
+    # print(get_recs("4b903895-7f8f-45d4-8fb8-978021e17c8e"))

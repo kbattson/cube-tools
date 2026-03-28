@@ -16,7 +16,7 @@ app.add_middleware(
 
 @app.get('/recommend')
 def recommend(cube_id: str):
-    return get_recs(cube_id)
+    return get_recs_sql(cube_id)
 
 @app.get('/test')
 def test():
