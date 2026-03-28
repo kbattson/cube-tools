@@ -21,6 +21,7 @@ def recommend(cube_id: str):
 @app.get('/test')
 def test():
     conn = psycopg2.connect(DB_URL)
+    cur = conn.cursor()
     cur.execute("SELECT COUNT(*) FROM cubes")
     count = cur.fetchone()
     cur.close()
